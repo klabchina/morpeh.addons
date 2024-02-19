@@ -33,5 +33,10 @@ namespace Scellecs.Morpeh.Addons.Feature
                 toSystems.Add(system);
             fromSystems.Clear();
         }
+
+        public FastList<ISystem> GetSystems()
+        {
+            return featureSystemsGroup.systems;
+        }
     }
 }

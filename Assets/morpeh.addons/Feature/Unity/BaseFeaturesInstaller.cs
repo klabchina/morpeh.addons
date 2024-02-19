@@ -10,6 +10,10 @@ namespace Scellecs.Morpeh.Addons.Feature.Unity
         private FixedUpdateFeature[] _fixedUpdateFeatures;
         private LateUpdateFeature[] _lateUpdateFeatures;
 
+        protected UpdateFeature[] UpdateFeatures => _updateFeatures;
+        protected FixedUpdateFeature[] FixedUpdateFeatures => _fixedUpdateFeatures;
+        protected LateUpdateFeature[] LateUpdateFeatures => _lateUpdateFeatures;
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
         private static void AddPlugins()
         {
@@ -25,7 +29,7 @@ namespace Scellecs.Morpeh.Addons.Feature.Unity
             }
 
             defaultWorld = World.Default;
-            
+
             InitializeShared();
             InitializeFeatures();
         }
@@ -66,6 +70,8 @@ namespace Scellecs.Morpeh.Addons.Feature.Unity
                 defaultWorld.AddFeature(order, _fixedUpdateFeatures[i]);
             for (int i = 0; i < _lateUpdateFeatures.Length; i++, order++)
                 defaultWorld.AddFeature(order, _lateUpdateFeatures[i]);
+
+            PostInitialize();
         }
 
         private void DisableFeatures()
@@ -77,5 +83,7 @@ namespace Scellecs.Morpeh.Addons.Feature.Unity
             for (int i = 0; i < _lateUpdateFeatures.Length; i++)
                 defaultWorld.RemoveFeature(_lateUpdateFeatures[i]);
         }
+
+        protected abstract void PostInitialize();
     }
 }
