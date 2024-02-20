@@ -39,7 +39,7 @@ namespace Scellecs.Morpeh.Addons.Feature
             return featureSystemsGroup.systems;
         }
 
-        public FastList<ISystem> GetInitializers()
+        public FastList<IInitializer> GetInitializers()
         {
             return featureSystemsGroup.initializers;
         }
